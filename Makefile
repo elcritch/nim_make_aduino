@@ -7,14 +7,15 @@ all: clean
 		-d:no_signal_handler -d:use_malloc --nimCache:"$(PWD)/nimcache" \
 		--compile_only --gen_script nim_test.nim
 
-	ls nimcache/*.cpp | sed 's/.cpp/.h/' | xargs -I%% touch %%
-	cp -v $(NIMCACHE)/*.nim.cpp $(PWD)/.
 	cp -v $(NIMLIB)/nimbase.h  $(PWD)/nimbase.h
+	ls nimcache/*.cpp | sed 's/.cpp/.h/' | xargs -I%% touch %%
+	ls nimcache/*.cpp | xargs -I%% ln -sf %% ./
+	# cp -v $(NIMCACHE)/*.nim.cpp $(PWD)/.
 
 
 clean:
 	rm -Rf $(NIMCACHE)
-	rm $(PWD)/*.cpp
-	rm $(PWD)/*.h
+	rm -Rf $(PWD)/*.cpp
+	rm -Rf $(PWD)/*.h
 
 
