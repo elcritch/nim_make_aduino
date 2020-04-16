@@ -4,7 +4,7 @@ NIMCACHE := nimcache
 ARDUINO_BOARD := adafruit:samd:adafruit_itsybitsy_m4
 
 all: nim
-	arduino-cli compile --fqbn $(ARDUINO_BOARD) -v ./
+	arduino-cli compile --fqbn $(ARDUINO_BOARD) -v $(PWD)/
 
 nim: clean
 	nim cpp --cpu:arm --os:any --gc:arc --exceptions:goto --no_main \
