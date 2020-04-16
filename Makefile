@@ -1,8 +1,12 @@
 
 NIMLIB := $(shell nim dump file.json 2>&1 | tail -n1)
 NIMCACHE := nimcache
+ARDUINO_BOARD := adafruit:samd:adafruit_itsybitsy_m4
 
-all: clean
+all: nim
+	arduino-cli compile --fqbn $(ARDUINO_BOARD) -v ./
+
+nim: clean
 	nim cpp --cpu:arm --os:any --gc:arc --exceptions:goto --no_main \
 		-d:no_signal_handler -d:use_malloc --nimCache:"$(PWD)/$(NIMCACHE)" \
 		--compile_only --gen_script nim_test.nim
@@ -15,6 +19,7 @@ all: clean
 old:
 	# cp -v $(NIMCACHE)/*.nim.cpp $(PWD)/.
 	# ls nimcache/*.cpp | sed 's/.cpp/.h/' | xargs -I%% ln -sf %% ./
+
 
 clean:
 	rm -Rf $(NIMCACHE)
