@@ -16,6 +16,9 @@ nim: clean
 	ls $(NIMCACHE)/*.cpp | sed 's/.cpp/.h/' | sed 's|$(NIMCACHE)/||' | xargs -I%% touch %%
 	ls $(NIMCACHE)/*.cpp | xargs -I%% ln -sf %% ./
 
+upload:
+	arduino-cli upload --fqbn $(ARDUINO_BOARD) -p $(ARGS) $(PWD)
+
 old:
 	# cp -v $(NIMCACHE)/*.nim.cpp $(PWD)/.
 	# ls nimcache/*.cpp | sed 's/.cpp/.h/' | xargs -I%% ln -sf %% ./
