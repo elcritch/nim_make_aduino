@@ -17,7 +17,7 @@ nim: clean
 	ls $(NIMCACHE)/*.cpp | xargs -I%% ln -sf %% ./
 
 upload:
-	arduino-cli upload --fqbn $(ARDUINO_BOARD) -p $(ARGS) $(PWD)
+	arduino-cli upload --fqbn $(ARDUINO_BOARD) -p $(device) $(PWD)
 
 old:
 	# cp -v $(NIMCACHE)/*.nim.cpp $(PWD)/.
@@ -26,6 +26,8 @@ old:
 
 clean:
 	rm -Rf $(NIMCACHE)
+	rm -f *.bin *.elf
+	rm -f *.cpp *.h
 	# rm -Rf $(PWD)/*.cpp
 	# rm -Rf $(PWD)/*.h
 
