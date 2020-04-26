@@ -8,8 +8,10 @@ all: nim
 	arduino-cli compile --fqbn $(ARDUINO_BOARD) -v $(PWD)/
 
 nim: clean
-	nim cpp --cpu:arm --os:any --gc:arc --exceptions:goto --no_main \
-		-d:no_signal_handler -d:use_malloc --nimCache:"$(PWD)/$(NIMCACHE)" \
+	nim cpp --cpu:arm --os:any --gc:arc \
+		--exceptions:goto --no_main --dead_code_elim:on --threads:off --tls_emulation:off \
+		-d:no_signal_handler -d:use_malloc \
+		--nim_cache:"$(PWD)/$(NIMCACHE)" \
 		--compile_only --gen_script $(NIM_PROGRAM)
 
 	@echo ls $(NIMCACHE)/*.cpp 
@@ -32,4 +34,11 @@ clean:
 	# rm -Rf $(PWD)/*.cpp
 	# rm -Rf $(PWD)/*.h
 
+distclean: clean
+	arduino-cli cache clean
+
+
+deps:
+	# arduino-cli lib install "Adafruit ADS1X15"
+	# arduino-cli lib install ArduinoUniqueID 
 
