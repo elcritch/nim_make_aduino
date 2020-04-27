@@ -137,13 +137,22 @@ proc echo*(msg: string) =
 
 # Convenience macros for the setup() and loop() functions
 
-template setup*(code: untyped) =
-  proc setup*() {.exportc.} =
-    code 
+when defined(arduinoCppLinkage):
+  template setup*(code: untyped) =
+    proc setup*() {.exportcpp.} =
+      code 
 
-template loop*(code: untyped) =
-  proc loop*() {.exportc.} =
-    code 
+  template loop*(code: untyped) =
+    proc loop*() {.exportcpp.} =
+      code 
+else:
+  template setup*(code: untyped) =
+    proc setup*() {.exportcpp.} =
+      code 
+
+  template loop*(code: untyped) =
+    proc loop*() {.exportcpp.} =
+      code 
 
 # Macro to move let sections in to PROGMEM
 

@@ -1,16 +1,25 @@
 
 NIMLIB := $(shell nim dump file.json 2>&1 | tail -n1)
 NIMCACHE := nimcache
-ARDUINO_BOARD := adafruit:samd:adafruit_itsybitsy_m4
+ARDUINO_BOARD := esp32:esp32:esp32thing
+ARDUINO_LINKAGE := arduinoCppLinkage
 NIM_PROGRAM := nim_test.nim
 
 all: nim
 	arduino-cli compile --fqbn $(ARDUINO_BOARD) -v $(PWD)/
 
 nim: clean
-	nim cpp --cpu:arm --os:any --gc:arc \
-		--exceptions:goto --no_main --dead_code_elim:on --threads:off --tls_emulation:off \
-		-d:no_signal_handler -d:use_malloc \
+	nim cpp --cpu:arm \
+		--os:any \
+		--gc:arc \
+		--exceptions:goto \
+		--no_main \
+		--dead_code_elim:on \
+		--threads:off \
+		--tls_emulation:off \
+		-d:no_signal_handler \
+		-d:use_malloc \
+		-d:$(ARDUINO_LINKAGE) \
 		--nim_cache:"$(PWD)/$(NIMCACHE)" \
 		--compile_only --gen_script $(NIM_PROGRAM)
 
