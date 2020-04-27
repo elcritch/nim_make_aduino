@@ -147,11 +147,11 @@ when defined(arduinoCppLinkage):
       code 
 else:
   template setup*(code: untyped) =
-    proc setup*() {.exportcpp.} =
+    proc setup*() {.exportc.} =
       code 
 
   template loop*(code: untyped) =
-    proc loop*() {.exportcpp.} =
+    proc loop*() {.exportc.} =
       code 
 
 # Macro to move let sections in to PROGMEM
