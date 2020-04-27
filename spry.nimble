@@ -7,7 +7,8 @@ bin           = @["spry","ispry"]
 srcDir        = "src"
 binDir        = "bin"
 skipExt       = @["nim"]
+backend       = "cpp"
 
 # Deps
-requires "spryvm"
+requires "https://github.com/elcritch/spryvm.git"
 
