@@ -4,11 +4,32 @@ import macros
 import strutils except `formatFloat`
 
 
-const LED_BUILTIN* = 13
-const HIGH* = 1
-const LOW* = 0
-const INPUT* = 0
-const OUTPUT* = 1
+# const LED_BUILTIN* = 5
+# const HIGH* = 1
+# const LOW* = 0
+# const INPUT* = 0
+# const OUTPUT* = 1
+
+const LOW* =               0x0
+const HIGH* =              0x1
+
+# GPIO FUNCTIONS
+const INPUT* =             0x01
+const OUTPUT* =            0x02
+const PULLUP* =            0x04
+const INPUT_PULLUP* =      0x05
+const PULLDOWN* =          0x08
+const INPUT_PULLDOWN* =    0x09
+const OPEN_DRAIN* =        0x10
+const OUTPUT_OPEN_DRAIN* = 0x12
+const SPECIAL* =           0xF0
+const FUNCTION_1* =        0x00
+const FUNCTION_2* =        0x20
+const FUNCTION_3* =        0x40
+const FUNCTION_4* =        0x60
+const FUNCTION_5* =        0x80
+const FUNCTION_6* =        0xA0
+const ANALOG* =            0xC0
 
 type
   cuchar = uint8

@@ -1,11 +1,13 @@
 import arduino
 
+const ledPin = 5
+
 setup:
-  pinMode LED_BUILTIN, OUTPUT
+  ledPin.pinMode OUTPUT
 
 loop:
-  digitalWrite LED_BUILTIN, HIGH
+  ledPin.digitalWrite HIGH
   delay 1000
-  digitalWrite LED_BUILTIN, LOW  
+  ledPin.digitalWrite LOW  
   delay 500
 
