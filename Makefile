@@ -1,15 +1,18 @@
 
+NIMBLE := _nimble
 NIMLIB := $(shell nim dump file.json 2>&1 | tail -n1)
 NIMCACHE := nimcache
 ARDUINO_BOARD := esp32:esp32:esp32thing:FlashFreq=80,PartitionScheme=no_ota,UploadSpeed=921600,DebugLevel=verbose
 ARDUINO_LINKAGE := arduinoCppLinkage
+ARDUINO_CPU := vm
 NIM_PROGRAM := nim_test.nim
 
 all: nim
 	arduino-cli compile --fqbn $(ARDUINO_BOARD) -v $(PWD)/
 
 nim: clean
-	nim cpp --cpu:arm \
+	nim cpp \
+		--cpu:$(ARDUINO_CPU) \
 		--os:any \
 		--gc:arc \
 		--exceptions:goto \
@@ -48,6 +51,10 @@ distclean: clean
 
 
 deps:
+	# nimble install -y --nimbleDir:"$(NIMBLE)" spryvm
+	nimble install -y --nimbleDir:"_nimble" https://github.com/elcritch/spryvm.git
+	rm -Rf $(NIMBLE)/bin/temp_file
+
 	# arduino-cli lib install "Adafruit ADS1X15"
 	# arduino-cli lib install ArduinoUniqueID 
 
