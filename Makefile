@@ -25,6 +25,7 @@ nim: clean
 		-d:use_malloc \
 		-d:$(ARDUINO_LINKAGE) \
 		--nim_cache:"$(PWD)/$(NIMCACHE)" \
+		--nimble_path:"$(NIMBLE)/pkgs" \
 		--compile_only --gen_script $(NIM_PROGRAM)
 
 	@echo ls $(NIMCACHE)/*.cpp 
