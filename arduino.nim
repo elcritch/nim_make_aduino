@@ -125,6 +125,8 @@ type
 
 var Serial* {.importcpp: "Serial", header: "Arduino.h".}: Stream
 proc begin*(this: var Stream; baud: cint) {.importcpp: "begin", header: "Arduino.h".}
+proc setTimeout*(this: Stream; index: culong) {.noSideEffect, cdecl,
+    importcpp: "setTimeout", header: "Arduino.h".}
 proc available*(this: var Stream): cint {.importcpp: "available", header: "Arduino.h".}
 proc read*(this: var Stream): cint {.importcpp: "read", header: "Arduino.h".}
 proc write*(this: var Stream; n: uint8): csize_t {.importcpp: "write", header: "HardwareSerial.h".}
@@ -132,29 +134,33 @@ proc print*(this: var Stream; s: cstring) {.importcpp: "print", header: "Arduino
 proc println*(this: var Stream; s: cstring) {.importcpp: "println", header: "Arduino.h".}
 proc pgmReadByte*(a: ptr uint8): uint8 {.importc:"pgm_read_byte", header:"avr/pgmspace.h" .}
 
-# proc `$`*(f: float): string = WString.formatFloat(f)
-# proc `$`*(f: float32): string = WString.formatFloat(f)
-# proc `$`*(f: float64): string = WString.formatFloat(f)
+proc readStringUntil*(this: var Stream, c: char): String {.importcpp: "readStringUntil", header: "Arduino.h".}
+proc readLine*(this: var Stream, c: char): String {.importcpp: "readStringUntil", header: "Arduino.h".}
 
 var Stdout*: ptr Stream 
 var Stdin*: ptr Stream 
 
 proc write*(this: ptr Stream, msg: string) =
   this[].print(msg)
-proc readLine*(this: ptr Stream): string =
+proc read*(this: ptr Stream): string =
   result = ""
-  while (this[].available() > 0):
+  while this[].available() > 0:
     result.add(this[].read().char)
+proc readLine*(this: ptr Stream): string =
+  var tmp = ""
+  var b: int = -1
+  # while not (c in ['\n', '\r']):
+  while true:
+    b = this[].read().int
+    echo "letter => " & $b
+    if b > 0:
+      var c = b.char
+      tmp.add(c.char)
+      if c.char in ['\n', '\r']:
+        return tmp
   
 proc echo*(msg: string) =
   Serial.println(msg)
-
-# proc myputchar*(c: char, f: FILE): cint {.exportc,cdecl.} =
-#   discard Serial.write(c.uint8).cint
-#   result = 0
-
-# proc fdevopen*(put: proc (a1: char; a2: FILE): cint {.cdecl.};
-#                get: proc (a1: FILE): cint {.cdecl.} ): FILE {.importcpp: "fdevopen(@)", header: "stdio.h".}
 
 # Convenience macros for the setup() and loop() functions
 
