@@ -1,0 +1,13 @@
+{"compile":[
+["/Users/elcritch/projects/pt/third-party/nim_test/nim_test/stdlib_system.nim.cpp", "clang++ -c -std=gnu++14 -funsigned-char  -w -pthread -g  -I/Users/elcritch/.asdf/installs/nim/devel/lib -I/Volumes/datastore/projects/pt/third-party/nim_test -o stdlib_system.nim.cpp.o stdlib_system.nim.cpp"],
+["/Users/elcritch/projects/pt/third-party/nim_test/nim_test/@marduino.nim.cpp", "clang++ -c -std=gnu++14 -funsigned-char  -w -pthread -g  -I/Users/elcritch/.asdf/installs/nim/devel/lib -I/Volumes/datastore/projects/pt/third-party/nim_test -o @marduino.nim.cpp.o @marduino.nim.cpp"],
+["/Users/elcritch/projects/pt/third-party/nim_test/nim_test/@mnim_test.nim.cpp", "clang++ -c -std=gnu++14 -funsigned-char  -w -pthread -g  -I/Users/elcritch/.asdf/installs/nim/devel/lib -I/Volumes/datastore/projects/pt/third-party/nim_test -o @mnim_test.nim.cpp.o @mnim_test.nim.cpp"]],
+"link":[
+"/Users/elcritch/projects/pt/third-party/nim_test/nim_test/stdlib_system.nim.cpp.o",
+"/Users/elcritch/projects/pt/third-party/nim_test/nim_test/@marduino.nim.cpp.o",
+"/Users/elcritch/projects/pt/third-party/nim_test/nim_test/@mnim_test.nim.cpp.o"
+],
+"linkcmd": "clang++   -o /Volumes/datastore/projects/pt/third-party/nim_test/nim_test.out  /Users/elcritch/projects/pt/third-party/nim_test/nim_test/stdlib_system.nim.cpp.o /Users/elcritch/projects/pt/third-party/nim_test/nim_test/@marduino.nim.cpp.o /Users/elcritch/projects/pt/third-party/nim_test/nim_test/@mnim_test.nim.cpp.o  -lm -pthread   -ldl",
+"extraCmds": [],
+"stdinInput": false
+}

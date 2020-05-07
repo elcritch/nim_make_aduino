@@ -1,0 +1,52 @@
+{
+  "reverseDeps": {
+    "stew": {
+      "0.1.0": [
+        {
+          "name": "rocksdb",
+          "version": "#5b1307cb1f4c85bb72ff781d810fb8c0148b1183"
+        }
+      ]
+    },
+    "tempfile": {
+      "0.1.7": [
+        {
+          "name": "rocksdb",
+          "version": "#5b1307cb1f4c85bb72ff781d810fb8c0148b1183"
+        }
+      ]
+    },
+    "python": {
+      "1.2": [
+        {
+          "name": "spryvm",
+          "version": "0.9.0"
+        }
+      ]
+    },
+    "ui": {
+      "0.9.4": [
+        {
+          "name": "spryvm",
+          "version": "0.9.0"
+        }
+      ]
+    },
+    "snappy": {
+      "0.1.0": [
+        {
+          "name": "spryvm",
+          "version": "0.9.0"
+        }
+      ]
+    },
+    "rocksdb": {
+      "#5b1307cb1f4c85bb72ff781d810fb8c0148b1183": [
+        {
+          "name": "spryvm",
+          "version": "0.9.0"
+        }
+      ]
+    }
+  }
+}
